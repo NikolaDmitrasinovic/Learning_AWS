@@ -4,7 +4,7 @@
 
 \*\*Progress Tracker Summary\*\*
 
-\- \[ ] Pre-Week 1 – Setup
+\- \[x] Pre-Week 1 – Setup
 
 \- \[ ] Week 1 – AWS Foundations
 
@@ -313,6 +313,7 @@ Slot them into your roadmap as follows:
 
 
 ⭐ \*\*By end of Week 5 →\*\* Built and deployed a full serverless backend (AWS Lambda, API Gateway, DynamoDB, S3) using CDK + SDK for .NET, aligned with the latest AWS learning paths.
+
 
 
 
