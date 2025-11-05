@@ -1,7 +1,7 @@
 import './App.css';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom"
@@ -15,7 +15,7 @@ function App() {
           <li><Link to="page1">Page 1</Link></li>
           <li><Link to="page2">Page 2</Link></li>
         </ul>
-        <Switch>
+        <Routes>
           <Route path='/page1'>
             <div>Page 1</div>
           </Route>
@@ -25,7 +25,7 @@ function App() {
           <Route path='/'>
             <div>Home</div>
           </Route>
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );
