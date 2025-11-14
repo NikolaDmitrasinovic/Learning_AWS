@@ -57,5 +57,22 @@ export class AwsOrdersStack extends cdk.Stack {
       restApiName: 'Orders Service'
     })
     const ordersResource = api.root.addResource('orders')
+
+    ordersResource.addMethod(
+      'POST',
+      new LambdaIntegration(ordersLambda)
+    )
+    
+    ordersResource.addMethod(
+      'GET',
+      new LambdaIntegration(getOrdersLambda)
+    )
+
+    const orderIdResource = ordersResource.addResource('{id}')
+    const confirmResource = orderIdResource.addResource('confirm')
+    ordersResource.addMethod(
+      'PATCH',
+      new LambdaIntegration(confirmOrderLambda)
+    )
   }
 }
