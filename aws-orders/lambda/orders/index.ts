@@ -1,10 +1,13 @@
-const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb')
-const crypto = require('crypto')
+import { DynamoDBClient, PutItemCommand, UpdateItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb'
+import crypto from 'crypto'
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 
 const client = new DynamoDBClient({})
 const tableName = process.env.ORDERS_TABLE
 
-exports.handler = async (event) => {
+export const handler = async (
+    event: APIGatewayProxyEvent
+    ): Promise<APIGatewayProxyResult> => {
     const method = event.httpMethod
     const path = event.path
 
