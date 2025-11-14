@@ -1,8 +1,10 @@
 import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
 import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { Code, Runtime, Function as LambdaFunction } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as cdk from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
+import { join } from 'path';
 
 export class AwsOrdersStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -16,10 +18,10 @@ export class AwsOrdersStack extends cdk.Stack {
     })
 
     //
-    const ordersLambda = new LambdaFunction(this, 'OrdersLambda', {
+    const ordersLambda = new NodejsFunction(this, 'OrdersLambda', {
+      entry: join(__dirname, "..", "..", 'lambda/orders/index.ts'),
+      handler: 'handler',
       runtime: Runtime.NODEJS_22_X,
-      handler: 'index.handler',
-      code: Code.fromAsset('lambda/orders'),
       environment: {
         ORDERS_TABLE: ordersTable.tableName
       }
