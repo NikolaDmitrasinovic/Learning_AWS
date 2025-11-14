@@ -1,7 +1,6 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-
 const client = new DynamoDBClient({})
 const tableName = process.env.ORDERS_TABLE!
 
