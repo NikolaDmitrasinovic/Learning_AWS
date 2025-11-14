@@ -70,7 +70,7 @@ export class AwsOrdersStack extends cdk.Stack {
 
     const orderIdResource = ordersResource.addResource('{id}')
     const confirmResource = orderIdResource.addResource('confirm')
-    ordersResource.addMethod(
+    confirmResource.addMethod(
       'PATCH',
       new LambdaIntegration(confirmOrderLambda)
     )
