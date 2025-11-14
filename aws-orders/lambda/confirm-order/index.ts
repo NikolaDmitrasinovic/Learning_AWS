@@ -25,7 +25,7 @@ export const handler = async (
         Key: { id: { S: id } },
         UpdateExpression: "SET #s = :S",
         ExpressionAttributeNames: { "#s": "status" },
-        ExpressionAttributeValues: { ":s": { S: 'CONFIRMED' } },
+        ExpressionAttributeValues: { ":S": { S: 'CONFIRMED' } },
         ReturnValues: 'UPDATED_NEW'
     })
 
