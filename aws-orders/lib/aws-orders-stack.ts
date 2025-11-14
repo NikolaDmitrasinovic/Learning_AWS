@@ -17,9 +17,19 @@ export class AwsOrdersStack extends cdk.Stack {
       billingMode: BillingMode.PAY_PER_REQUEST
     })
 
-    //
+    // POST
     const ordersLambda = new NodejsFunction(this, 'OrdersLambda', {
       entry: join(__dirname, "..", "..", 'aws-orders/lambda/orders/index.ts'),
+      handler: 'handler',
+      runtime: Runtime.NODEJS_22_X,
+      environment: {
+        ORDERS_TABLE: ordersTable.tableName
+      }
+    })
+
+    //GET
+    const getOrdersLambda = new NodejsFunction(this, 'GetOrdersLambda', {
+      entry: 'aws-orders/lambda/orders/get-orders',
       handler: 'handler',
       runtime: Runtime.NODEJS_22_X,
       environment: {
