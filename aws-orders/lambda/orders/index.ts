@@ -1,6 +1,7 @@
 import { DynamoDBClient, PutItemCommand, UpdateItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb'
 import crypto from 'crypto'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { Order, OrderItem } from '../shared/order'
 
 const client = new DynamoDBClient({})
 const tableName = process.env.ORDERS_TABLE
@@ -18,7 +19,11 @@ export const handler = async (
         const id = crypto.randomUUID()
         const date = body.date || new Date().toISOString()
         const status = body.status || 'NEW'
-        const items = Array.isArray(body.items) ? body.items: []
+        const items: OrderItem[] = Array.isArray(body.items) ? body.items: []
+
+        const order: Order = {
+            id, date, status, items
+        }
 
         // simple item serialization
         const cmd = new PutItemCommand({
@@ -35,7 +40,7 @@ export const handler = async (
 
         return {
             statusCode: 201,
-            body: JSON.stringify({id, message: 'order created'})
+            body: JSON.stringify({id: order.id, message: 'order created'})
         }
     }
 
