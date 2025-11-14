@@ -49,6 +49,8 @@ export class AwsOrdersStack extends cdk.Stack {
 
     // permissions
     ordersTable.grantReadWriteData(ordersLambda)
+    ordersTable.grantReadData(getOrdersLambda)
+    ordersTable.grantReadWriteData(confirmOrderLambda)
 
     //
     const api = new RestApi(this, 'OrdersApi', {
