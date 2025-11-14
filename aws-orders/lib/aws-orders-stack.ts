@@ -37,6 +37,16 @@ export class AwsOrdersStack extends cdk.Stack {
       }
     })
 
+    // PATCH
+    const confirmOrderLambda = new NodejsFunction(this, 'ConfirmOrderLambda', {
+      entry: 'aws-orders/lambda/orders/confirm-order',
+      handler: 'handler',
+      runtime: Runtime.NODEJS_22_X,
+      environment: {
+        ORDERS_TABLE: ordersTable.tableName
+      }
+    })
+
     // permissions
     ordersTable.grantReadWriteData(ordersLambda)
 
