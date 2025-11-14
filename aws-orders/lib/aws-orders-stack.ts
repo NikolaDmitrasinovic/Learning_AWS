@@ -1,4 +1,4 @@
-import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
+import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { Code, Runtime, Function as LambdaFunction } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
@@ -31,9 +31,9 @@ export class AwsOrdersStack extends cdk.Stack {
     ordersTable.grantReadWriteData(ordersLambda)
 
     //
-    const api = new LambdaRestApi(this, 'OrdersApi', {
-      handler: ordersLambda,
-      proxy: true
+    const api = new RestApi(this, 'OrdersApi', {
+      restApiName: 'Orders Service'
     })
+    const ordersResource = api.root.addResource('orders')
   }
 }
