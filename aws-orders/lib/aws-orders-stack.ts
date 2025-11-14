@@ -19,7 +19,7 @@ export class AwsOrdersStack extends cdk.Stack {
 
     //
     const ordersLambda = new NodejsFunction(this, 'OrdersLambda', {
-      entry: join(__dirname, "..", "..", 'lambda/orders/index.ts'),
+      entry: join(__dirname, "..", "..", 'aws-orders/lambda/orders/index.ts'),
       handler: 'handler',
       runtime: Runtime.NODEJS_22_X,
       environment: {
