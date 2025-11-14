@@ -29,7 +29,7 @@ export class AwsOrdersStack extends cdk.Stack {
 
     //GET
     const getOrdersLambda = new NodejsFunction(this, 'GetOrdersLambda', {
-      entry: 'aws-orders/lambda/get-orders/index.ts',
+      entry: join(__dirname, "..", "..", 'aws-orders/lambda/get-orders/index.ts'),
       handler: 'handler',
       runtime: Runtime.NODEJS_22_X,
       environment: {
@@ -39,7 +39,7 @@ export class AwsOrdersStack extends cdk.Stack {
 
     // PATCH
     const confirmOrderLambda = new NodejsFunction(this, 'ConfirmOrderLambda', {
-      entry: 'aws-orders/lambda/confirm-order/index.ts',
+      entry: join(__dirname, "..", "..", 'aws-orders/lambda/confirm-order/index.ts'),
       handler: 'handler',
       runtime: Runtime.NODEJS_22_X,
       environment: {
